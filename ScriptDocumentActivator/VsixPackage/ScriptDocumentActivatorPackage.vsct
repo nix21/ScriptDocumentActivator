@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h" />
+
+  <Extern href="vsshlids.h" />
+
+  <Commands package="guidPackage">
+    
+    <Buttons>
+      <Button guid="guidPackageCmdSet" id="cmdidHealthCheckCommand" priority="0x0100" type="Button">
+        <Parent guid="guidPackageCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages" id="bmpHeart" />
+        <Strings>
+          <ButtonText>Check Document Activator Health</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+    <Bitmaps>
+      <Bitmap guid="guidImages" href="..\Resources\Command.png" usedList="bmpHeart" />
+    </Bitmaps>
+    
+    <Groups>
+      <Group guid="guidPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS" />
+      </Group>
+    </Groups>
+    
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="guidPackage" value="{7d94a7cd-e6a7-48fb-84fb-944d3ec70c96}" />
+
+    <GuidSymbol name="guidImages" value="{76d3d511-ee30-4034-b241-6a9dd59bbd32}">
+      <IDSymbol name="bmpHeart" value="1" />
+    </GuidSymbol>
+
+    <GuidSymbol value="{9d75581b-87dc-4bd5-8061-57be718160ba}" name="guidPackageCmdSet">
+      <IDSymbol value="4128" name="MyMenuGroup" />
+      <IDSymbol value="256" name="cmdidHealthCheckCommand" />
+    </GuidSymbol>
+
+  </Symbols>
+</CommandTable>
