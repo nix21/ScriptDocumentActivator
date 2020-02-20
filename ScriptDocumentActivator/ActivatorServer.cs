@@ -51,7 +51,7 @@ namespace ScriptDocumentActivator
                 ci.AdvancedOptions["DATABASE"] = dbName;
                 if (string.IsNullOrEmpty(userName))
                 {
-                    ci.AuthenticationType = (int)SqlAuthenticationMethod.ActiveDirectoryIntegrated;
+                    ci.AuthenticationType = (int)SqlAuthenticationMethod.NotSpecified;
                     ci.UserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
                 }
                 else
