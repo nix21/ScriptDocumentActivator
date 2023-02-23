@@ -1,0 +1,44 @@
+﻿using System;
+using System.ServiceModel;
+using ScriptDocumentActivator.ScriptActivation;
+
+namespace ScriptDocumentActivatorCli
+{
+    public class SsmsScriptDocumentActivatorProxy : IScriptDocumentActivator, IDisposable
+    {
+        public const string NamedPipeBaseUrl = "net.pipe://localhost/ScriptDocumentActivator";
+
+        public static string ApplicationKey => @"ScriptDocumentActivator";
+
+        private readonly ChannelFactory<IScriptDocumentActivator> _pipeFactory;
+
+        private bool _isDisposed = false;
+
+        public SsmsScriptDocumentActivatorProxy()
+        {
+            string endPointUri = NamedPipeBaseUrl + "/" + ApplicationKey;
+            _pipeFactory = new ChannelFactory<IScriptDocumentActivator>(new NetNamedPipeBinding(), new EndpointAddress(endPointUri));
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                if (disposing)
+                    _pipeFactory.Close();
+
+                _isDisposed = true;
+            }
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        public void OpenDocument(string serverName, string dbName, string userName, string password)
+        {
+            IScriptDocumentActivator channel = _pipeFactory.CreateChannel();
+            channel.OpenDocument(serverName, dbName, userName, password);
+        }
+    }
+}
